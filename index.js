@@ -10,6 +10,7 @@ const rootDirectory = require('./util/path')
 const app = express()
 
 app.use(bodyParser.urlencoded({extended:false}))
+app.use(express.static(path.join(__dirname,'public')))
 
 app.use('/admin',admin)
 app.use(shop)
