@@ -5,6 +5,7 @@ const path = require('path')
 
 const admin = require('./routes/admin')
 const shop = require('./routes/shop')
+const rootDirectory = require('./util/path')
 
 const app = express()
 
@@ -14,7 +15,7 @@ app.use('/admin',admin)
 app.use(shop)
 
 app.use((request,response) => {
-    response.status(404).sendFile(path.join(__dirname,'views','404.html'))
+    response.status(404).sendFile(path.join(rootDirectory,'views','404.html'))
 })
 
 app.listen(3000)
