@@ -12,7 +12,7 @@ const app = express()
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')))
 
-app.use('/admin',admin)
+app.use('/admin',admin.route)
 app.use(shop)
 
 app.use((request,response) => {
