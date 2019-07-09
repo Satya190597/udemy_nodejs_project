@@ -9,8 +9,8 @@ const route = express.Router()
 
 route.get('/',(request,response,next) => {
     console.log(`>>> ${JSON.stringify(admin.products)} <<<`)
-    // response.sendFile(path.join(rootDirectory,'views','shop.html'))
-    response.render('shop')
+    response.sendFile(path.join(rootDirectory,'views','shop.html'))
+    // response.render('shop')
 })
 
 module.exports = route
