@@ -4,8 +4,9 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title My Shop
+        title #{title}
         link(rel="stylesheet", href="/css/layout.css")
+        link(rel="stylesheet", href="/css/card.css")
     body
         header.main-header
             nav.navigation
@@ -14,4 +15,20 @@ html(lang="en")
                         a(href="/") Shop
                     li.list-item
                         a(href="/admin/add-product") Add Product
-        
+        main
+            h1 My Products
+            p List of all the products
+            if products.length > 0
+                each product in products
+                    .card
+                        .card-header
+                            span #{product.title}
+                        .card-image
+                            img(src="", alt="")
+                        .card-body 
+                            .card-body-details
+                                p This is some kind of dummy text
+                            .card-body-controls
+                                button Add To Chart
+            else
+                p No Products Available...
