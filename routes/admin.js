@@ -10,7 +10,7 @@ const products = []
 
 route.get('/add-product',(request,response,next) => {
     // response.status(200).sendFile(path.join(rootDirectory,'views','admin-product.html'))
-    response.render('admin-product')
+    response.render('admin-product',{title:'Add Product'})
 })
 route.post('/add-product',(request,response,next) => {
     // console.log(`Data : ${request.body.title}`)

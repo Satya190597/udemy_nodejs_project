@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title Document
-        link(rel="stylesheet", href="/css/layout.css")
-    body
-        header.main-header
-            nav.navigation
-                ul.navigation-list
-                    li.list-item
-                        a(href="/") Shop
-                    li.list-item
-                        a(href="/admin/add-product") Add Product
-        main
-            form(action="/admin/add-product" method="POST")
-                input(type="text" name="title")
-                button(type="submit") Add Product
+extends layouts/layout.pug
+
+block content
+    main
+        form(action="/admin/add-product" method="POST")
+            input(type="text" name="title")
+            button(type="submit") Add Product
