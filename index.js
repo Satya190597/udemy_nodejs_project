@@ -9,6 +9,14 @@ const rootDirectory = require('./util/path')
 
 const app = express()
 
+/*
+    Setting up the template engine
+    1. view engine : String which define the installed view-engine
+    2. views : A directory or an array of directories for the application's views
+ */
+app.set('view engine','pug')
+app.set('views','views')
+
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')))
 
