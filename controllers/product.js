@@ -13,5 +13,8 @@ exports.postAddProduct = (request,response) => {
 
 exports.getAllProducts = (request,response) => {
     // response.sendFile(path.join(rootDirectory,'views','shop.html'))
-    response.status(200).render('shop',{products:Product.fetchAll(),title:'Shop'})
+    Product.fetchAll((products) => {
+        response.status(200).render('shop',{products:products,title:'Shop'})
+    })
+    
 }
