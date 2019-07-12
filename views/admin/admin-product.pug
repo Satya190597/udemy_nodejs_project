@@ -1,19 +1,30 @@
 extends ../layouts/layout.pug
-
+block styles
+    link(rel="stylesheet", href="/css/form.css")
 block content
     main
-        form(action="/admin/add-product" method="POST")
-            div
-                label(for="title") Title
-                input(type="text" name="title" id="title")
-            div
-                label(for="price") Price
-                input(type="text" name="price" id="price")
-            div
-                label(for="title") Description
-                textarea(name="description", cols="30", rows="5" id="title")
-            div
-                label(for="imageUrl") Image Url
-                input(type="text" name="imageUrl" id="imageUrl")
-            div
-                button(type="submit") Add Product
+        .form-container
+            form(action="/admin/add-product" method="POST")
+                .form-row
+                    .form-col-1
+                        label(for="title") Title
+                    .form-col-2
+                        input(type="text" name="title" id="title").input-control
+                .form-row
+                    .form-col-1
+                        label(for="price") Price
+                    .form-col-2
+                        input(type="text" name="price" id="price").input-control
+                .form-row
+                    .form-col-1
+                        label(for="title") Description
+                    .form-col-2
+                        textarea(name="description", cols="30", rows="5" id="title").textarea
+                .form-row
+                    .form-col-1
+                        label(for="imageUrl") Image Url
+                    .form-col-2
+                        input(type="text" name="imageUrl" id="imageUrl").input-control
+                .form-row
+                    .form-col-2
+                        button(type="submit") Add Product
