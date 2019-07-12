@@ -17,9 +17,12 @@ const readProductFile = (callBack) => {
 }
 
 module.exports = class Product{
-    constructor(title)
+    constructor(title,description,price,imageUrl)
     {
         this.title = title
+        this.description = description
+        this.price = price
+        this.imageUrl = imageUrl
     }
     save()
     {

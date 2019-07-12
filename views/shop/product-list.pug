@@ -16,7 +16,8 @@ block content
                         img(src="", alt="")
                     .card-body 
                         .card-body-details
-                            p This is some kind of dummy text
+                            p #{product.description}
+                            span #{product.price}
                         .card-body-controls
                             button Add To Chart
         else
