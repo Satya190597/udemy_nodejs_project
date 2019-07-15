@@ -18,3 +18,17 @@ exports.getAllProducts = (request,response) => {
     })
     
 }
+
+exports.getProductDetail = (request,response) => {
+
+    const productId = request.params.productId
+
+    Product.fetchAll((products) => {
+        for(let i = 0; i<products.length; i++)
+        {
+            if(products[i].id == productId)
+                return response.render('shop/product-detail',{product:products[i]})
+        }
+        return response.render('shop/product-detail',{product:[]})
+    })
+}

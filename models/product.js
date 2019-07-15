@@ -19,6 +19,7 @@ const readProductFile = (callBack) => {
 module.exports = class Product{
     constructor(title,description,price,imageUrl)
     {
+        this.id = Math.random()
         this.title = title
         this.description = description
         this.price = price
