@@ -14,6 +14,8 @@ route.get('/products/:productId',productController.getProductDetail)
 
 route.get('/cart',shopController.getCart)
 
+route.post('/cart',shopController.addCart)
+
 route.get('/checkout',shopController.getCheckout)
 
 

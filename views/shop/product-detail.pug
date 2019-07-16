@@ -17,6 +17,11 @@ block content
                     p #{product.description}
                     span #{product.price}
                 .card-body-controls
-                    button Add To Chart
+                    form(action="/cart" method="POST")
+                        - var productId = product.id + ""
+                        - var price = product.price + ""
+                        input(type="hidden" value=productId name="id")
+                        input(type="hidden" value=price name="price")
+                        button Add To Chart
         //- else
         //-     p Sorry This Product Is Not Available

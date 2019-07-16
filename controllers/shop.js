@@ -1,4 +1,5 @@
 const Product = require('../models/product')
+const Cart = require('../models/cart')
 
 exports.getAllProducts = (request,response) => {
     // response.sendFile(path.join(rootDirectory,'views','shop.html'))
@@ -16,6 +17,12 @@ exports.getIndex = (request,response) => {
 
 exports.getCart = (request,response) => {
     response.status(200).render('shop/cart',{title:'Your Cart'})
+}
+
+exports.addCart = (request,response) => {
+    console.log(request.body.id)
+    Cart.addProduct(request.body.id,request.body.price)
+    response.redirect('/')
 }
 
 exports.getCheckout = (request,response) => {
