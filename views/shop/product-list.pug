@@ -19,8 +19,10 @@ block content
                             p #{product.description}
                             span #{product.price}
                         .card-body-controls
-                            - var url = "/products/" + product.id
-                            a(href=url) View Product
+                            - var urlEditProduct = "/admin/edit-product/" + product.id
+                            a(href=urlEditProduct) Edit Product
+                            - var urlProductDetail = "/products/" + product.id
+                            a(href=urlProductDetail) View Product
                             button Add To Chart
         else
             p No Products Available...
