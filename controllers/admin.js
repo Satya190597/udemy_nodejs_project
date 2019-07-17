@@ -2,7 +2,7 @@ const Product = require('../models/product')
 
 exports.getAddProduct = (request,response) => {
     // response.status(200).sendFile(path.join(rootDirectory,'views','admin-product.html'))
-    response.status(200).render('admin/edit-product',{title:'Add Product'})
+    response.status(200).render('admin/edit-product',{title:'Add Product',post:'/admin/add-product',edit:false})
 }
 
 exports.postAddProduct = (request,response) => {
@@ -18,10 +18,10 @@ exports.getEditProduct = (request,response) => {
         {
             if(products[i].id===parseFloat(productId))
             {   
-                return response.status(200).render('admin/edit-product',{title:'Edit Product',product:products[i],edit:true})
+                return response.status(200).render('admin/edit-product',{title:'Edit Product',post:'/admin/edit-product',product:products[i],edit:true})
             }
         }
-        return response.status(200).render('admin/edit-product',{title:'Add Product',edit:true})
+        return response.status(200).render('admin/edit-product',{title:'Add Product',post:'/admin/add-product',edit:true})
     })
     
 }
