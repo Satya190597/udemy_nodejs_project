@@ -12,6 +12,8 @@ block content
                     .form-col-2
                         if edit
                             - let productTitle = product.title
+                            - let productId = product.id
+                            input(type="hidden" name="id" value=productId)
                             input(type="text" name="title" id="title" value=productTitle).input-control
                         else
                             input(type="text" name="title" id="title").input-control
@@ -29,8 +31,8 @@ block content
                         label(for="title") Description
                     .form-col-2
                         if edit
-                            - let productDescription = product.description
-                            textarea(name="description", cols="30", rows="5" id="title").textarea productDescription
+                            textarea(name="description", cols="30", rows="5" id="title").textarea
+                                | #{product.description}
                         else
                             textarea(name="description", cols="30", rows="5" id="title").textarea
                 .form-row

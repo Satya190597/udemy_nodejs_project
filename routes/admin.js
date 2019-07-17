@@ -10,6 +10,8 @@ route.post('/add-product',adminController.postAddProduct)
 
 route.get('/edit-product/:productId',adminController.getEditProduct)
 
+route.post('/edit-product',adminController.postEditProduct)
+
 route.get('/products')
 
 module.exports = route

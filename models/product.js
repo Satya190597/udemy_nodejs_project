@@ -17,9 +17,9 @@ const readProductFile = (callBack) => {
 }
 
 module.exports = class Product{
-    constructor(title,price,description,imageUrl)
+    constructor(id,title,price,description,imageUrl)
     {
-        this.id = Math.random()
+        this.id = id
         this.title = title
         this.description = description
         this.price = price
@@ -28,7 +28,19 @@ module.exports = class Product{
     save()
     {
         readProductFile((products) => {
-            products.push(this)
+            if(this.id)
+            {
+                let productIndex = products.findIndex(p => p.id === parseFloat(this.id))
+                products[productIndex].title = this.title
+                products[productIndex].description = this.description
+                products[productIndex].price = this.price
+                products[productIndex].imageUrl = this.imageUrl
+            }
+            else
+            {
+                this.id = Math.random()
+                products.push(this)
+            }
             fs.writeFile(file,JSON.stringify(products),(error) => {
                 if(error)
                     console.log(`Write File Error : ${error}`)

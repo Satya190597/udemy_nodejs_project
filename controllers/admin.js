@@ -25,3 +25,9 @@ exports.getEditProduct = (request,response) => {
     })
     
 }
+
+exports.postEditProduct = (request,response) => {
+    const product = new Product(request.body.id,request.body.title,request.body.price,request.body.description,request.body.imageUrl)
+    product.save()
+    response.status(200).redirect(`/admin/edit-product/${request.body.id}`)
+}
