@@ -30,11 +30,9 @@ module.exports = class Product{
         readProductFile((products) => {
             if(this.id)
             {
-                let productIndex = products.findIndex(p => p.id === parseFloat(this.id))
-                products[productIndex].title = this.title
-                products[productIndex].description = this.description
-                products[productIndex].price = this.price
-                products[productIndex].imageUrl = this.imageUrl
+                this.id = parseFloat(this.id)
+                let productIndex = products.findIndex(p => p.id === this.id)
+                products[productIndex] = this
             }
             else
             {
