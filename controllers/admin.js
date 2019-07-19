@@ -38,25 +38,6 @@ exports.postEditProduct = (request,response) => {
 }
 
 exports.deleteProduct = (request,response) => {
-    const productId = parseFloat(request.body.id)
-    Product.fetchAll((products)=>{
-        let newProductList = []
-        for(let i = 0; i < products.length; i++)
-        {
-            if(products[i].id!==productId)
-            {
-                newProductList.push(products[i])
-            }
-        }
-        fs.writeFile(file,JSON.stringify(newProductList),(error)=>{
-            if(error)
-            {
-                console.log('Something Went Wrong')
-            }
-            else
-            {
-                response.redirect('/products')
-            }
-        })
-    })
+    Product.deleteById(parseFloat(request.body.id))
+    response.redirect('/products')
 }

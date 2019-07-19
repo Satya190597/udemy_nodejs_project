@@ -49,4 +49,16 @@ module.exports = class Product{
     {
         readProductFile(callBack)
     }
+    static deleteById(id)
+    {
+        readProductFile((products)=>{
+            const productList = products.filter(p => p.id!==id)
+            fs.writeFile(file,JSON.stringify(productList),(error) => {
+                if(error)
+                    console.log(`Write File Error : ${error}`)
+                    
+                
+            })
+        })
+    }
 }
