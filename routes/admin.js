@@ -12,6 +12,8 @@ route.get('/edit-product/:productId',adminController.getEditProduct)
 
 route.post('/edit-product',adminController.postEditProduct)
 
+route.post('/delete-product',adminController.deleteProduct)
+
 route.get('/products')
 
 module.exports = route

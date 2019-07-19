@@ -24,5 +24,9 @@ block content
                             - var urlProductDetail = "/products/" + product.id
                             a(href=urlProductDetail) View Product
                             button Add To Chart
+                            form(action="/admin/delete-product" method="POST")
+                                - let productId = product.id
+                                input(type="hidden" value=productId name="id")
+                                button(type="submit") Delete Product
         else
             p No Products Available...
