@@ -28,3 +28,8 @@ exports.addCart = (request,response) => {
 exports.getCheckout = (request,response) => {
     response.status(200).render('shop/checkout',{title:'Checkout'})
 }
+
+exports.deleteCartItems = (request,response) => {
+    Cart.deleteProduct(request.body.id,parseInt(request.body.price))
+    response.redirect('/')
+}
