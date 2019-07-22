@@ -5,11 +5,12 @@ exports.getAddProduct = (request,response) => {
     response.status(200).render('admin/admin-product',{title:'Add Product'})
 }
 
-exports.postAddProduct = (request,response) => {
-    const product = new Product(request.body.title,request.body.price,request.body.description,request.body.imageUrl)
-    product.save()
-    response.status(200).redirect('/admin/add-product')
-}
+// --- This feature is added in admin controller --
+// exports.postAddProduct = (request,response) => {
+//     const product = new Product(null,request.body.title,request.body.price,request.body.description,request.body.imageUrl)
+//     product.save()
+//     response.status(200).redirect('/admin/add-product')
+// }
 
 exports.getAllProducts = (request,response) => {
     // response.sendFile(path.join(rootDirectory,'views','shop.html'))
