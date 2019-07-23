@@ -1,1 +1,22 @@
 extends ../layouts/layout.pug
+block styles
+    link(rel="stylesheet", href="/css/card.css")
+block content
+    main
+        h1 Shop
+        p List of all the products
+        if cart.length > 0
+            each cartItem in cart
+                .card
+                    .card-header
+                        span #{cartItem.product.title}
+                    .card-image
+                        img(src="", alt="")
+                    .card-body 
+                        .card-body-details
+                            p #{cartItem.product.description}
+                            p #{cartItem.product.qty}
+                        .card-body-controls
+                            button Add To Chart
+        else
+            p No Products Available...

@@ -20,5 +20,4 @@ route.post('/cart-delete',shopController.deleteCartItems)
 
 route.get('/checkout',shopController.getCheckout)
 
-
 module.exports = route

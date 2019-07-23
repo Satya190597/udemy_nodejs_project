@@ -16,7 +16,21 @@ exports.getIndex = (request,response) => {
 }
 
 exports.getCart = (request,response) => {
-    response.status(200).render('shop/cart',{title:'Your Cart'})
+    Cart.getCartItems((cart)=>{
+        cart = JSON.parse(cart)
+        Product.fetchAll((products) => {
+            const cartItems = []
+            for(product of products)
+            {
+                let p = cart.products.find(prod => parseFloat(prod.id) === product.id)
+                if(p)
+                {
+                    cartItems.push({product:product,qty:p.qty})
+                }
+            }
+            response.status(200).render('shop/cart',{title:'Your Cart',cart:cartItems})
+        })
+    })
 }
 
 exports.addCart = (request,response) => {

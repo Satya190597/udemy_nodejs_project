@@ -59,4 +59,18 @@ module.exports = class Cart {
             }
         })
     }
+    // [Get Cart Items]
+    static getCartItems(callback)
+    {
+        fs.readFile(rootPath+'/data/cart.json',(error,data)=>{
+            if(!error)
+            {
+                callback(data)
+            }
+            else
+            {
+                callback(null)
+            }
+        })
+    }
 }
