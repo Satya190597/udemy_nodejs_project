@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const db = require('../util/datbase')
 
 const rootDirectory = require('../util/path')
 
@@ -27,23 +28,32 @@ module.exports = class Product{
     }
     save()
     {
-        readProductFile((products) => {
-            if(this.id)
-            {
-                this.id = parseFloat(this.id)
-                let productIndex = products.findIndex(p => p.id === this.id)
-                products[productIndex] = this
-            }
-            else
-            {
-                this.id = Math.random()
-                products.push(this)
-            }
-            fs.writeFile(file,JSON.stringify(products),(error) => {
-                if(error)
-                    console.log(`Write File Error : ${error}`)
-            })
+        // readProductFile((products) => {
+        //     if(this.id)
+        //     {
+        //         this.id = parseFloat(this.id)
+        //         let productIndex = products.findIndex(p => p.id === this.id)
+        //         products[productIndex] = this
+        //     }
+        //     else
+        //     {
+        //         this.id = Math.random()
+        //         products.push(this)
+        //     }
+        //     fs.writeFile(file,JSON.stringify(products),(error) => {
+        //         if(error)
+        //             console.log(`Write File Error : ${error}`)
+        //     })
+        // })
+        
+        // ---------------- MongoDb code to add product ----------------
+        const mongo = db.getDb()
+        return mongo.collection('products').insertOne(this).then(result => {
+            console.log(result)
+        }).catch(error => {
+            console.log(error)
         })
+        // ---------------- End ----------------
     }
     static fetchAll(callBack)
     {
