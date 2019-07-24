@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
 
+const mongodbConnect = require('./util/datbase')
 const admin = require('./routes/admin')
 const shop = require('./routes/shop')
 const errorController = require('./controllers/error')
@@ -26,4 +27,7 @@ app.use(shop)
 
 app.use(errorController.get404)
 
-app.listen(3000)
+mongodbConnect.connect((client)=>{
+    console.log(client)
+    app.listen(3000)
+})
