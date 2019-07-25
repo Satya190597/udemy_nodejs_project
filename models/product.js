@@ -57,7 +57,12 @@ module.exports = class Product{
     }
     static fetchAll(callBack)
     {
-        readProductFile(callBack)
+        const mongo = db.getDb()
+        mongo.collection('products').find().toArray().then((products)=>{
+            callBack(products)
+        }).catch((error)=>{
+            throw error
+        })
     }
     static deleteById(id)
     {
