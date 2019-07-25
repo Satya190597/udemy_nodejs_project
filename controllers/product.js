@@ -22,14 +22,13 @@ exports.getAllProducts = (request,response) => {
 
 exports.getProductDetail = (request,response) => {
 
-    const productId = request.params.productId
-
-    Product.fetchAll((products) => {
-        for(let i = 0; i<products.length; i++)
-        {
-            if(products[i].id == productId)
-                return response.render('shop/product-detail',{product:products[i]})
-        }
+    Product.findById(request.params.productId)
+    .then(product => {
+        return esponse.render('shop/product-detail',{product:product})
+    })
+    .catch((error) => {
+        console.log(error)
         return response.render('shop/product-detail',{product:[]})
     })
+
 }

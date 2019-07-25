@@ -1,3 +1,4 @@
+const mongodb = require('mongodb')
 const fs = require('fs')
 const path = require('path')
 const db = require('../util/datbase')
@@ -26,44 +27,51 @@ module.exports = class Product{
         this.price = price
         this.imageUrl = imageUrl
     }
+
+    // >>> MongoDb code to add product <<<
     save()
     {
-        // readProductFile((products) => {
-        //     if(this.id)
-        //     {
-        //         this.id = parseFloat(this.id)
-        //         let productIndex = products.findIndex(p => p.id === this.id)
-        //         products[productIndex] = this
-        //     }
-        //     else
-        //     {
-        //         this.id = Math.random()
-        //         products.push(this)
-        //     }
-        //     fs.writeFile(file,JSON.stringify(products),(error) => {
-        //         if(error)
-        //             console.log(`Write File Error : ${error}`)
-        //     })
-        // })
-        
-        // ---------------- MongoDb code to add product ----------------
         const mongo = db.getDb()
         return mongo.collection('products').insertOne(this).then(result => {
             console.log(result)
         }).catch(error => {
             console.log(error)
         })
-        // ---------------- End ----------------
     }
+    // >>> End <<
+
+    // >>> MongoDb code to find all products <<<
     static fetchAll(callBack)
     {
         const mongo = db.getDb()
-        mongo.collection('products').find().toArray().then((products)=>{
+        mongo.collection('products')
+        .find()
+        .toArray()
+        .then((products)=>{
             callBack(products)
         }).catch((error)=>{
             throw error
         })
     }
+    // >>> End <<<
+
+    // >>> MongoDb code to find a particular product <<<
+    static findById(id)
+    {
+        const mongo = db.getDb()
+        return mongo.collection('products')
+        .find({_id:new mongodb.ObjectID(id)})
+        .next()
+        .then((product) => {
+            return product
+        })
+        .catch((error) => {
+            console.log('Error '+error+' Id '+id)
+            throw error
+        })
+    }
+    // >>> End <<
+
     static deleteById(id)
     {
         readProductFile((products)=>{
@@ -71,8 +79,7 @@ module.exports = class Product{
             fs.writeFile(file,JSON.stringify(productList),(error) => {
                 if(error)
                     console.log(`Write File Error : ${error}`)
-                    
-                
+                          
             })
         })
     }

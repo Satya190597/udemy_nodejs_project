@@ -21,7 +21,7 @@ block content
                         .card-body-controls
                             - var urlEditProduct = "/admin/edit-product/" + product.id
                             a(href=urlEditProduct) Edit Product
-                            - var urlProductDetail = "/products/" + product.id
+                            - var urlProductDetail = "/products/" + product._id
                             a(href=urlProductDetail) View Product
                             button Add To Chart
                             form(action="/admin/delete-product" method="POST")
