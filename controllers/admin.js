@@ -41,3 +41,9 @@ exports.deleteProduct = (request,response) => {
     Product.deleteById(parseFloat(request.body.id))
     response.redirect('/products')
 }
+
+exports.getProduct = (request,response) => {
+    Product.fetchAll((products)=>{
+        response.status(200).render('admin/product-list',{products:products})
+    })
+}

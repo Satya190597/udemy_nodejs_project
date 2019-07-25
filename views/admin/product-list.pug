@@ -1,0 +1,32 @@
+extends ../layouts/layout.pug
+
+block styles
+    link(rel="stylesheet", href="/css/card.css")
+
+block content
+    main
+        h1 My Products
+        p List of all the products
+        if products.length > 0
+            each product in products
+                .card
+                    .card-header
+                        span #{product.title}
+                    .card-image
+                        img(src="", alt="")
+                    .card-body 
+                        .card-body-details
+                            p #{product.description}
+                            span #{product.price}
+                        .card-body-controls
+                            - var urlEditProduct = "/admin/edit-product/" + product.id
+                            a(href=urlEditProduct) Edit Product
+                            - var urlProductDetail = "/products/" + product._id
+                            a(href=urlProductDetail) View Product
+                            button Add To Chart
+                            form(action="/admin/delete-product" method="POST")
+                                - let productId = product.id
+                                input(type="hidden" value=productId name="id")
+                                button(type="submit") Delete Product
+        else
+            p No Products Available...
