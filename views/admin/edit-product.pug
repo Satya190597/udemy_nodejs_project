@@ -12,7 +12,7 @@ block content
                     .form-col-2
                         if edit
                             - let productTitle = product.title
-                            - let productId = product.id
+                            - let productId = product._id
                             input(type="hidden" name="id" value=productId)
                             input(type="text" name="title" id="title" value=productTitle).input-control
                         else

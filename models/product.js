@@ -32,10 +32,15 @@ module.exports = class Product{
     save()
     {
         const mongo = db.getDb()
-        return mongo.collection('products').insertOne(this).then(result => {
+        let dbOperation = this.id ? mongo.collection('products').updateOne({_id: new mongodb.ObjectID(this.id)},{$set:this}) : mongo.collection('products').insertOne(this)
+        return dbOperation
+        .then(result => {
             console.log(result)
-        }).catch(error => {
+            return result
+        })
+        .catch(error => {
             console.log(error)
+            throw error
         })
     }
     // >>> End <<
@@ -72,15 +77,19 @@ module.exports = class Product{
     }
     // >>> End <<
 
+    // >>> MongoDb code to delete a particular product <<<
     static deleteById(id)
     {
-        readProductFile((products)=>{
-            const productList = products.filter(p => p.id!==id)
-            fs.writeFile(file,JSON.stringify(productList),(error) => {
-                if(error)
-                    console.log(`Write File Error : ${error}`)
-                          
-            })
+        const mongo = db.getDb()
+        return mongo.collection('products')
+        .deleteOne({_id:new mongodb.ObjectID(id)})
+        .then(result => {
+            console.log(result)
+            return result
+        })
+        .catch(result => {
+            throw error
         })
     }
+    // >>> End <<
 }

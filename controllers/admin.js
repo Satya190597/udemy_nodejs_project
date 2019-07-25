@@ -34,8 +34,16 @@ exports.postEditProduct = (request,response) => {
 }
 
 exports.deleteProduct = (request,response) => {
-    Product.deleteById(parseFloat(request.body.id))
-    response.redirect('/products')
+    Product.deleteById(request.body.id)
+    .then((result) => {
+        console.log(`\n\n>>> Result ....${result}....`)
+        response.redirect('/products')
+    })
+    .catch(error => {
+        console.log(error)
+        response.redirect('/products')
+    })
+    
 }
 
 exports.getProduct = (request,response) => {
