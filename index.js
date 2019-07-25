@@ -6,6 +6,7 @@ const path = require('path')
 const mongodbConnect = require('./util/datbase')
 const admin = require('./routes/admin')
 const shop = require('./routes/shop')
+const user = require('./routes/user')
 const errorController = require('./controllers/error')
 
 const app = express()
@@ -23,6 +24,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')))
 
 app.use('/admin',admin)
+app.use('/user',user)
 app.use(shop)
 
 app.use(errorController.get404)
