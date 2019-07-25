@@ -19,14 +19,14 @@ block content
                             p #{product.description}
                             span #{product.price}
                         .card-body-controls
-                            - var urlEditProduct = "/admin/edit-product/" + product.id
-                            a(href=urlEditProduct) Edit Product
+                            - var urlEditProduct = "/admin/edit-product/" + product._id
+                            a.card-button(href=urlEditProduct).button Edit Product
                             - var urlProductDetail = "/products/" + product._id
-                            a(href=urlProductDetail) View Product
-                            button Add To Chart
+                            a.card-button(href=urlProductDetail) View Product
+                            button.card-button Add To Chart
                             form(action="/admin/delete-product" method="POST")
-                                - let productId = product.id
+                                - let productId = product._id
                                 input(type="hidden" value=productId name="id")
-                                button(type="submit") Delete Product
+                                button.card-button(type="submit") Delete Product
         else
             p No Products Available...

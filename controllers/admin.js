@@ -17,18 +17,14 @@ exports.postAddProduct = (request,response) => {
 }
 
 exports.getEditProduct = (request,response) => {
-    const productId = request.params.productId
-    Product.fetchAll((products) => {
-        for(let i = 0; i < products.length; i++)
-        {
-            if(products[i].id===parseFloat(productId))
-            {   
-                return response.status(200).render('admin/edit-product',{title:'Edit Product',post:'/admin/edit-product',product:products[i],edit:true})
-            }
-        }
-        return response.status(200).render('admin/edit-product',{title:'Add Product',post:'/admin/add-product',edit:true})
+    Product.findById(request.params.productId)
+    .then((product) => {
+        return response.status(200).render('admin/edit-product',{title:'Edit Product',post:'/admin/edit-product',product:product,edit:true})
     })
-    
+    .catch((error) => {
+        console.log('Error '+error)
+        return response.redirect('admin/products')
+    })
 }
 
 exports.postEditProduct = (request,response) => {

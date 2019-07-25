@@ -35,9 +35,8 @@
     flex: 1;
     text-align: center;
     padding: 5%;
-    font-weight: bolder;
 }
-.card-body .card-body-controls button
+.card-button
 {
     padding: 3%;
     border: 2px solid #095764;
@@ -45,6 +44,10 @@
     font-weight: bold;
     background-color: #ffffff;
     color: #095764;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    margin-bottom: 5px;
 }
 .card-body .card-body-controls button:hover
 {
