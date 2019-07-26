@@ -10,4 +10,11 @@ router.post('/create-user',(request,response)=>{
     })
 })
 
+router.get('/user/:userId',(request,response)=>{
+    User.findById(request.params.userId)
+    .then((result)=>{
+        console.log('>>>> result' + result)
+    })
+})
+
 module.exports = router
