@@ -19,13 +19,14 @@ const readProductFile = (callBack) => {
 }
 
 module.exports = class Product{
-    constructor(id,title,price,description,imageUrl)
+    constructor(id,title,price,description,imageUrl,userId)
     {
         this.id = id
         this.title = title
         this.description = description
         this.price = price
         this.imageUrl = imageUrl
+        this.userId = userId
     }
 
     // >>> MongoDb code to add product <<<
@@ -35,7 +36,6 @@ module.exports = class Product{
         let dbOperation = this.id ? mongo.collection('products').updateOne({_id: new mongodb.ObjectID(this.id)},{$set:this}) : mongo.collection('products').insertOne(this)
         return dbOperation
         .then(result => {
-            console.log(result)
             return result
         })
         .catch(error => {

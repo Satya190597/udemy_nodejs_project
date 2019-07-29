@@ -11,7 +11,7 @@ exports.getAddProduct = (request,response) => {
 }
 
 exports.postAddProduct = (request,response) => {
-    const product = new Product(null,request.body.title,request.body.price,request.body.description,request.body.imageUrl)
+    const product = new Product(null,request.body.title,request.body.price,request.body.description,request.body.imageUrl,request.user._id)
     product.save()
     response.status(200).redirect('/admin/add-product')
 }
@@ -28,7 +28,7 @@ exports.getEditProduct = (request,response) => {
 }
 
 exports.postEditProduct = (request,response) => {
-    const product = new Product(request.body.id,request.body.title,request.body.price,request.body.description,request.body.imageUrl)
+    const product = new Product(request.body.id,request.body.title,request.body.price,request.body.description,request.body.imageUrl,request.user._id)
     product.save()
     response.status(200).redirect(`/admin/edit-product/${request.body.id}`)
 }

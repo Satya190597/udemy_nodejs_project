@@ -7,6 +7,9 @@ const mongodbConnect = require('./util/datbase')
 const admin = require('./routes/admin')
 const shop = require('./routes/shop')
 const user = require('./routes/user')
+
+const User = require('./models/user')
+
 const errorController = require('./controllers/error')
 
 const app = express()
@@ -23,9 +26,26 @@ app.set('views','views')
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')))
 
+
+/* Get a particular user for every request */
+
+app.use((request,response,next) => {
+    User.findById('5d0cb32ed4cc7a2ca4606df0')
+    .then((result) => {
+        request.user = result
+        next()
+    })
+    .catch((error) => {
+        throw error;
+    })
+})
+
+
 app.use('/admin',admin)
 app.use('/user',user)
 app.use(shop)
+
+
 
 app.use(errorController.get404)
 

@@ -22,11 +22,10 @@ module.exports = class User
     static findById(id)
     {
         const mongo = db.getDb()
-        return mongo.collection('products')
-        .find({_id:new mongodb.ObjectID(id)})
-        .next()
-        .then((product) => {
-            return product
+        return mongo.collection('users')
+        .findOne({_id:new mongodb.ObjectID(id)})
+        .then((user) => {
+            return user
         })
         .catch((error) => {
             console.log('Error '+error+' Id '+id)
