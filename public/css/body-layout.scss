@@ -9,11 +9,19 @@ $colors : (
 {
     @return map-get($colors,$color);
 }
+html
+{
+    margin: 0;
+    padding: 0;
+    width: 100%; 
+}
 body
 {
     margin: 0;
     padding: 0;
     width: 100%;
+    overflow-x: hidden;
+    position: relative;
     .product-container
     {
         display: flex;
