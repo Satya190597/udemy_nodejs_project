@@ -1,5 +1,11 @@
-const db = require('../util/datbase')
+/*
+    Imports dependencies
+*/
 const mongodb = require('mongodb')
+const db = require('../util/datbase')
+
+
+
 module.exports = class User 
 {
     constructor(username,email)

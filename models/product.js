@@ -1,22 +1,5 @@
 const mongodb = require('mongodb')
-const fs = require('fs')
-const path = require('path')
 const db = require('../util/datbase')
-
-const rootDirectory = require('../util/path')
-
-const file = path.join(rootDirectory,'data','product.json')
-
-const readProductFile = (callBack) => {
-    let file = path.join(rootDirectory,'data','product.json')
-    fs.readFile(file,(error,data) => {
-        if(error)
-        {
-            callBack([])
-        }
-        callBack(JSON.parse(data))
-    })
-}
 
 module.exports = class Product{
     constructor(id,title,price,description,imageUrl,userId)
