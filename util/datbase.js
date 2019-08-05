@@ -1,6 +1,6 @@
 const mongodb = require('mongodb')
 const MongodbClient = mongodb.MongoClient
-const connectionUrl = 'mongodb+srv://satya_read_write:gw5qaUEPknFmZt0g@cluster0-zokmm.mongodb.net/test?retryWrites=true&w=majority'
+const connectionUrl = 'mongodb+srv://satya_read_write:6RdrkutxX1Q6FtvI@cluster0-zokmm.mongodb.net/test?retryWrites=true&w=majority'
 
 let _db;
 

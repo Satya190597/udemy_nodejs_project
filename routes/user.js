@@ -17,4 +17,13 @@ router.get('/user/:userId',(request,response)=>{
     })
 })
 
+/*
+---- Add To Cart Feature ----
+*/
+router.post('/user/add-to-cart',(request,response) => {
+    const user = new User(request.user.name,request.user.email,request.user.cart,request.user._id)
+    user.addToCart(request.body.id)
+    response.render('/products')
+})
+
 module.exports = router

@@ -17,11 +17,11 @@ block content
                     p #{product.description}
                     span #{product.price}
                 .card-body-controls
-                    form(action="/cart" method="POST")
+                    form(action="/user/user/add-to-cart" method="POST")
                         - var productId = product.id + ""
                         - var price = product.price + ""
                         input(type="hidden" value=productId name="id")
                         input(type="hidden" value=price name="price")
-                        button Add To Chart
+                        button(type="submit") Add To Cart
         //- else
         //-     p Sorry This Product Is Not Available
