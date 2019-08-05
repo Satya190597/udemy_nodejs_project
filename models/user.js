@@ -86,6 +86,26 @@ module.exports = class User
             })
         })
     }
+    /*
+    --- Delete Cart Item ---
+    */
+    deleteCartItems(productId)
+    {
+        // --- Call Connection ---
+        const mongo = db.getDb()
+
+        // --- Filter Out The Deleted Product From Cart ---
+        const updatedCart = this.cart.items.filter(product => {
+            return product.productId.toString() !== productId.toString()
+        })
+        
+        // --- Update User With New Cart Item ---
+        return mongo.collection('users')
+        .updateOne({_id:this.id},{$set:{cart:updatedCart}})
+        .then(data => {
+            return data
+        })
+    }
     static findById(id)
     {
         const mongo = db.getDb()

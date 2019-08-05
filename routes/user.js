@@ -18,6 +18,17 @@ router.get('/user/get-cart',(request,response) => {
         response.status(200).json(cart)
     })    
 })
+
+/*
+--- Delete Cart Item ---
+*/
+router.post('/user/delete-cart',(request,response) => {
+    const user = new User(request.user.name,request.user.email,request.user.cart,request.user._id)
+    user.deleteCartItems(request.body.id).then((data) => {
+        response.status(200).json(data)
+    })
+})
+
 router.get('/user/:userId',(request,response)=>{
     User.findById(request.params.userId)
     .then((result)=>{
