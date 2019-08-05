@@ -1,6 +1,8 @@
 const db = require('../util/datbase')
 const Product = require('./product')
-const mongodb = require('mongodb')
+
+
+
 module.exports = class User 
 {
     constructor(username,email,cart,id)

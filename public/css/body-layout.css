@@ -1,0 +1,65 @@
+/*
+    Function [To map colour name with colour values in $color variable]
+*/
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body .product-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+}
+
+body .product-container .product-card {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  max-width: 90%;
+  min-width: 90%;
+  border: 2px solid #3358a8;
+  border-radius: 5px;
+  margin: 1px auto;
+}
+
+body .product-container .product-card .product-card-header {
+  background-color: #3358a8;
+  padding: 5%;
+  text-align: center;
+  font-weight: bolder;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+body .product-container .product-card .product-card-image {
+  width: 100%;
+  text-align: center;
+}
+
+body .product-container .product-card .product-card-image img {
+  width: 50%;
+}
+
+body .product-container .product-card .product-card-body {
+  text-align: center;
+  font-weight: bolder;
+}
+/*# sourceMappingURL=body-layout.css.map */

@@ -1,0 +1,64 @@
+$colors : (
+    primary : #3358a8,
+    font-light : #ffffff
+);
+/*
+    Function [To map colour name with colour values in $color variable]
+*/
+@function color($color)
+{
+    @return map-get($colors,$color);
+}
+html
+{
+    margin: 0;
+    padding: 0;
+    width: 100%; 
+}
+body
+{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    .product-container
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        .product-card
+        {
+            flex: 1;
+            max-width: 90%;
+            min-width: 90%;
+            border: 2px solid color(primary);
+            border-radius: 5px;
+            margin: 1px auto;
+            .product-card-header
+            {
+                background-color: color(primary);
+                padding: 5%;
+                text-align: center;
+                font-weight: bolder;
+                color: color(font-light);
+                font-size: 18px;
+            }
+            .product-card-image
+            {
+                width: 100%;
+                text-align: center;
+                img 
+                {
+                    width: 50%;
+                }
+            }
+            .product-card-body
+            {
+                text-align: center;
+                font-weight: bolder;
+            }
+        }
+    }
+}
