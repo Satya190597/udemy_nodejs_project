@@ -1,3 +1,4 @@
+const mongodb = require('mongodb')
 const db = require('../util/datbase')
 const Product = require('./product')
 
@@ -53,6 +54,35 @@ module.exports = class User
                 if(err)
                     console.log('>>> Error '+err)
                 console.log('>>> Data Updated'+data)
+            })
+        })
+    }
+    /*
+    -- Get Cart Functionality --
+    */
+    getCart()
+    {
+        // --- Get Connection ---
+        const mongo = db.getDb();
+
+        // --- Get Products Ids From User Cart ---
+        const productIds = this.cart.items.map( item => {
+            return mongodb.ObjectId(item.productId)
+        })
+
+        // --- Get Full product details from productIds ---
+
+        return mongo.collection('products')
+        .find({_id:{$in:productIds}})
+        .toArray()
+        .then(product => {
+            return product.map(p => {
+                return {
+                    ...p,
+                    quantity: this.cart.items.find(item => {
+                        return item.productId.toString() === p._id.toString()
+                    }).quantity
+                }
             })
         })
     }
