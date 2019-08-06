@@ -33,9 +33,9 @@ module.exports = class User
         /*
         --- Update User Id ---
         */
-        const userItems = [...this.cart.items]
+        const userItems = this.cart.items ? [...this.cart.items] : []
         Product.findById(productId).then((product) => {
-            if(product)
+            if(userItems.length>0)
             {
                 const index = userItems.findIndex(items => {
                     return items.productId.toString() === productId.toString()
