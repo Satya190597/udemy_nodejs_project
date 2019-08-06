@@ -106,6 +106,38 @@ module.exports = class User
             return data
         })
     }
+    /*
+    --- Add Orders ---
+    */
+    addOrders()
+    {
+        // Step 1:  Call Connection 
+        // Step 2:  Get Cart Items 
+        // Step 3:  Add Product
+        // Step 4:  Empty The Cart
+
+        const mongo = db.getDb() 
+
+        return this.getCart().then(product => {
+            const cart = {
+                product : product,
+                user : {
+                    name: this.name,
+                    id: this.id
+                }
+            }
+            return mongo.collection('orders')
+            .insertOne(cart)
+            .then(data => {
+                const emptyCart = {items:[],totalAmount:0}
+                return mongo.collection('users')
+                .updateOne({_id:new mongodb.ObjectID(this.id)},{$set:{cart:emptyCart}})
+                .then(result => {
+                    return result;
+                })
+            })
+        })
+    }
     static findById(id)
     {
         const mongo = db.getDb()

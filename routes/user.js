@@ -10,6 +10,16 @@ router.post('/create-user',(request,response)=>{
     })
 })
 /*
+--- Add Order ---
+*/
+router.get('/user/add-order',(request,response) => {
+    const user = new User(request.user.name,request.user.email,request.user.cart,request.user._id)
+    user.addOrders().then((result) => {
+        response.status(200).json(result)
+    })    
+})
+
+/*
 --- Get Cart Item Rouet ---
 */
 router.get('/user/get-cart',(request,response) => {
