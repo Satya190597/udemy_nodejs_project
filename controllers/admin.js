@@ -11,9 +11,21 @@ exports.getAddProduct = (request,response) => {
 }
 
 exports.postAddProduct = (request,response) => {
-    const product = new Product(null,request.body.title,request.body.price,request.body.description,request.body.imageUrl,request.user._id)
+    // const product = new Product(null,request.body.title,request.body.price,request.body.description,request.body.imageUrl,request.user._id)
+    const product = new Product({
+        title : request.body.title,
+        description : request.body.description,
+        price : request.body.price,
+        imageUrl : request.body.imageUrl
+    })
     product.save()
-    response.status(200).redirect('/admin/add-product')
+    .then(product => {
+        console.log('Product Create >> '+product)
+        response.status(200).redirect('/admin/add-product')
+    })
+    .catch(error => {
+        console.log("Error "+error)
+    })  
 }
 
 exports.getEditProduct = (request,response) => {
