@@ -31,16 +31,19 @@ app.use(express.static(path.join(__dirname,'images')))
 
 /* Get a particular user for every request */
 
-// app.use((request,response,next) => {
-//     User.findById('5d0cb32ed4cc7a2ca4606df0')
-//     .then((result) => {
-//         request.user = result
-//         next()
-//     })
-//     .catch((error) => {
-//         throw error;
-//     })
-// })
+app.use((request,response,next) => {
+    /*
+        --- Mongoose ---
+    */
+    User.findById('5d4ae000a0b8674a60b02719')
+    .then(user => {
+        request.user = user
+        next()
+    })
+    .catch((error) => {
+        console.log('Unable To Set Error In Request '+error)
+    })
+})
 
 
 app.use('/admin',admin)
@@ -52,8 +55,27 @@ app.use(errorController.get404)
 const connectionUrl = 'mongodb+srv://satya_read_write:6RdrkutxX1Q6FtvI@cluster0-zokmm.mongodb.net/test?retryWrites=true&w=majority'
 mongoose.connect(connectionUrl,{useNewUrlParser: false})
 .then(result => {
-    console.log(result)
-    app.listen(3000)
+    User.findOne()
+    .then(user => {
+        console.log(">>>"+user)
+        if(!user)
+        {
+            const newUser = new User({
+                name : 'Satya Prakash Nandy',
+                email : 'nandy@yahoo.in',
+                cart : {items:[]}
+            })
+            return newUser.save()
+        }
+        return user
+    })
+    .then(user => {
+        console.log('>>> Current User' + user)
+        app.listen(3000)
+    })
+    .catch(error => {
+        console.log('>>> Unable To Create User' + error)
+    }) 
 })
 .catch(error => {
     console.log('Unable To Connect '+error)

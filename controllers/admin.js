@@ -18,7 +18,8 @@ exports.postAddProduct = (request,response) => {
         title : request.body.title,
         description : request.body.description,
         price : request.body.price,
-        imageUrl : request.body.imageUrl
+        imageUrl : request.body.imageUrl,
+        userId : request.user
     })
     product.save()
     .then(product => {
