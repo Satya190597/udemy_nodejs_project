@@ -31,33 +31,52 @@ exports.postAddProduct = (request,response) => {
 }
 
 exports.getEditProduct = (request,response) => {
+    /*
+        --- Mongoose ---
+    */
     Product.findById(request.params.productId)
-    .then((product) => {
+    .then(product => {
         return response.status(200).render('admin/edit-product',{title:'Edit Product',post:'/admin/edit-product',product:product,edit:true})
     })
-    .catch((error) => {
+    .catch(error => {
         console.log('Error '+error)
         return response.redirect('admin/products')
     })
 }
 
 exports.postEditProduct = (request,response) => {
-    const product = new Product(request.body.id,request.body.title,request.body.price,request.body.description,request.body.imageUrl,request.user._id)
-    product.save()
-    response.status(200).redirect(`/admin/edit-product/${request.body.id}`)
+    /*
+        --- Mongoose ---
+    */
+    Product.findById(request.body.id)
+    .then(product => {
+        product.title = request.body.title
+        product.price = request.body.price
+        product.description = request.body.description
+        product.imageUrl = request.body.imageUrl
+        return product.save()
+    })
+    .then(updatedProduct => {
+        console.log(updatedProduct)
+        response.status(200).redirect(`/admin/edit-product/${request.body.id}`)
+    })
+    .catch(error => {
+        console.log('Product Updation Failed' + error)
+    })
 }
 
 exports.deleteProduct = (request,response) => {
-    Product.deleteById(request.body.id)
-    .then((result) => {
-        console.log(`\n\n>>> Result ....${result}....`)
+    /*
+        --- Mongoose ---
+    */
+    Product.findByIdAndRemove(request.body.id)
+    .then(result => {
+        console.log(result)
         response.redirect('/products')
     })
     .catch(error => {
         console.log(error)
-        response.redirect('/products')
     })
-    
 }
 
 exports.getProduct = (request,response) => {
