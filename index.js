@@ -31,20 +31,20 @@ app.use(express.static(path.join(__dirname,'images')))
 
 /* Get a particular user for every request */
 
-app.use((request,response,next) => {
-    User.findById('5d0cb32ed4cc7a2ca4606df0')
-    .then((result) => {
-        request.user = result
-        next()
-    })
-    .catch((error) => {
-        throw error;
-    })
-})
+// app.use((request,response,next) => {
+//     User.findById('5d0cb32ed4cc7a2ca4606df0')
+//     .then((result) => {
+//         request.user = result
+//         next()
+//     })
+//     .catch((error) => {
+//         throw error;
+//     })
+// })
 
 
 app.use('/admin',admin)
-app.use('/user',user)
+// app.use('/user',user)
 app.use(shop)
 
 app.use(errorController.get404)
