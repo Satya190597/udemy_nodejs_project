@@ -7,6 +7,7 @@ const mongodbConnect = require('./util/datbase')
 const admin = require('./routes/admin')
 const shop = require('./routes/shop')
 const user = require('./routes/user')
+const mongoose = require('mongoose')
 
 const User = require('./models/user')
 
@@ -46,11 +47,14 @@ app.use('/admin',admin)
 app.use('/user',user)
 app.use(shop)
 
-
-
 app.use(errorController.get404)
 
-mongodbConnect.connect((client)=>{
-    console.log(client)
+const connectionUrl = 'mongodb+srv://satya_read_write:6RdrkutxX1Q6FtvI@cluster0-zokmm.mongodb.net/test?retryWrites=true&w=majority'
+mongoose.connect(connectionUrl,{useNewUrlParser: false})
+.then(result => {
+    console.log(result)
     app.listen(3000)
+})
+.catch(error => {
+    console.log('Unable To Connect '+error)
 })
