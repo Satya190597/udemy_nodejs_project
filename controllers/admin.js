@@ -11,7 +11,9 @@ exports.getAddProduct = (request,response) => {
 }
 
 exports.postAddProduct = (request,response) => {
-    // const product = new Product(null,request.body.title,request.body.price,request.body.description,request.body.imageUrl,request.user._id)
+    /*
+        --- Mongoose ---
+    */
     const product = new Product({
         title : request.body.title,
         description : request.body.description,
@@ -59,7 +61,14 @@ exports.deleteProduct = (request,response) => {
 }
 
 exports.getProduct = (request,response) => {
-    Product.fetchAll((products)=>{
+    /*
+        --- Mongoose ---
+    */
+    Product.find()
+    .then(products => {
         response.status(200).render('admin/product-list',{products:products})
+    })
+    .catch(error => {
+        console.log('Uable To Get Products ' + error)
     })
 }

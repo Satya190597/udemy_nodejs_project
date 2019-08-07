@@ -14,12 +14,14 @@ exports.getAllProducts = (request,response) => {
 }
 
 exports.getProductDetail = (request,response) => {
-
+    /*
+        --- Mongoose ---
+    */
     Product.findById(request.params.productId)
     .then(product => {
         return response.render('shop/product-detail',{product:product})
     })
-    .catch((error) => {
+    .catch(error => {
         console.log(error)
         return response.render('shop/product-detail',{product:[]})
     })

@@ -2,17 +2,29 @@ const Product = require('../models/product')
 const Cart = require('../models/cart')
 
 exports.getAllProducts = (request,response) => {
-    // response.sendFile(path.join(rootDirectory,'views','shop.html'))
-    Product.fetchAll((products) => {
+    /*
+        --- Mongoose ---
+    */
+    Product.find()
+    .then(products => {
         response.status(200).render('shop/product-list',{products:products,title:'Shop'})
     })
-    
+    .catch(error => {
+        console.log('Unable To Get Products' + error)
+    })
 }
 
 exports.getIndex = (request,response) => {
-    Product.fetchAll((products) => {
-        response.status(200).render('shop/index',{products:products,title:'Shop'})
-    })
+   /*
+        --- Mongoose ---
+    */
+   Product.find()
+   .then(products => {
+       response.status(200).render('shop/product-list',{products:products,title:'Shop'})
+   })
+   .catch(error => {
+       console.log('Unable To Get Products' + error)
+   })
 }
 
 exports.getCart = (request,response) => {
