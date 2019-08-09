@@ -1,5 +1,6 @@
 const Product = require('../models/product')
 const Cart = require('../models/cart')
+const User = require('../models/user')
 
 exports.getAllProducts = (request,response) => {
     /*
@@ -28,20 +29,18 @@ exports.getIndex = (request,response) => {
 }
 
 exports.getCart = (request,response) => {
-    Cart.getCartItems((cart)=>{
-        cart = JSON.parse(cart)
-        Product.fetchAll((products) => {
-            const cartItems = []
-            for(product of products)
-            {
-                let p = cart.products.find(prod => parseFloat(prod.id) === product.id)
-                if(p)
-                {
-                    cartItems.push({product:product,qty:p.qty})
-                }
-            }
-            response.status(200).render('shop/cart',{title:'Your Cart',cart:cartItems})
-        })
+
+    //---- Mongoose ----
+    User.findById(request.user)
+    .select('cart')
+    .populate('cart.items.productId')
+    .exec()
+    .then(cart => {
+        console.log('Cart >> '+cart.cart.items)
+        response.status(200).render('shop/cart',{title:'Your Cart',cart:cart.cart.items})
+    })
+    .catch(error => {
+        console.log('Error '+error)
     })
 }
 

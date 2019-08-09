@@ -9,14 +9,14 @@ block content
             each cartItem in cart
                 .card
                     .card-header
-                        span #{cartItem.product.title}
+                        span #{cartItem.productId.title}
                     .card-image
                         img(src="", alt="")
                     .card-body 
                         .card-body-details
-                            p #{cartItem.product.description}
-                            p Qunatity #{cartItem.qty}
+                            p #{cartItem.productId.description}
+                            p Qunatity #{cartItem.quantity}
                         .card-body-controls
-                            button Add To Chart
+                            button Delete
         else
             p No Products Available...
