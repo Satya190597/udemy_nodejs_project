@@ -47,7 +47,7 @@ app.use((request,response,next) => {
 
 
 app.use('/admin',admin)
-// app.use('/user',user)
+app.use('/user',user)
 app.use(shop)
 
 app.use(errorController.get404)
