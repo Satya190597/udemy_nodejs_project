@@ -6,4 +6,5 @@
     <li>Update Product</li>
     <li>Delete Product</li>
     <li>Adding Cart Item</li>
+    <li>Working With Mongoose</li>
 </ul>

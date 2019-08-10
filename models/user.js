@@ -50,6 +50,13 @@ user.methods.addToCart = function (product){
    return this.save()
 }
 
+user.methods.deleteItemsFromCart = function(productId){
+    /*
+        1. Get user cart items
+        2. Filter cart items removing the product
+        3. Update the cart
+    */
+}
 module.exports = mongoose.model('User',user)
 // const mongodb = require('mongodb')
 // const db = require('../util/datbase')

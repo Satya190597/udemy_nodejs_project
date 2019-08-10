@@ -55,6 +55,7 @@ exports.getCheckout = (request,response) => {
 }
 
 exports.deleteCartItems = (request,response) => {
-    Cart.deleteProduct(request.body.id,parseInt(request.body.price))
+    console.log(request.body.productId)
+    //Cart.deleteProduct(request.body.id,parseInt(request.body.price))
     response.redirect('/')
 }

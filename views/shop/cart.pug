@@ -17,6 +17,9 @@ block content
                             p #{cartItem.productId.description}
                             p Qunatity #{cartItem.quantity}
                         .card-body-controls
-                            button Delete
+                            form(action="/cart-delete" method="POST")
+                                - var productId = cartItem.productId._id + ""
+                                input(type="hidden" name="productId" value=productId)
+                                button(type="submit") Delete
         else
             p No Products Available...
