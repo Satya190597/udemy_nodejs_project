@@ -50,8 +50,9 @@ const User = require('../models/user')
 ---- Add To Cart Feature ----
 */
 router.post('/user/add-to-cart',(request,response) => {
-    request.user.addToCart(request.body.id)
-    response.render('/products')
+    request.user.addToCart(request.body.id).then(result => {
+        response.redirect('/cart')
+    })
 })
 
 
