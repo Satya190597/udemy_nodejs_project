@@ -50,12 +50,23 @@ user.methods.addToCart = function (product){
    return this.save()
 }
 
-user.methods.deleteItemsFromCart = function(productId){
+user.methods.deleteItemsFromCart = function(id){
     /*
         1. Get user cart items
         2. Filter cart items removing the product
         3. Update the cart
     */
+    const updatedCart = this.cart.items.filter( items => {
+        return items._id.toString()!=id
+    })
+    this.cart.items = updatedCart
+    return this.save()
+    .then(user => {
+        return user;
+    })
+    .catch(error => {
+    console.log('Unable to remove item from cart '+error)
+    })
 }
 module.exports = mongoose.model('User',user)
 // const mongodb = require('mongodb')
