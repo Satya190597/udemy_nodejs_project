@@ -1,0 +1,12 @@
+$colors : (
+    primary : #3358a8,
+    primary-light: #abe6f1,
+    font-light : #ffffff
+);
+/*
+    Function [To map colour name with colour values in $color variable]
+*/
+@function color($color)
+{
+    @return map-get($colors,$color);
+}

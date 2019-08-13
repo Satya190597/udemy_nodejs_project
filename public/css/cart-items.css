@@ -1,0 +1,46 @@
+/*
+    Function [To map colour name with colour values in $color variable]
+*/
+.cart-items-data-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 5px;
+  width: inherit;
+}
+
+.cart-items-data-grid .cart-items-row {
+  width: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  margin-bottom: 10px;
+  background-color: #abe6f1;
+  color: #3358a8;
+}
+
+.cart-items-data-grid .cart-items-row .cart-items-column {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.cart-items-data-grid .cart-items-row .cart-items-column-description {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+.cart-items-data-grid .cart-items-row:last-child {
+  margin-bottom: 0;
+}
+/*# sourceMappingURL=cart-items.css.map */

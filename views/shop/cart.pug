@@ -1,25 +1,30 @@
 extends ../layouts/layout.pug
 block styles
     link(rel="stylesheet", href="/css/card.css")
+    link(rel="stylesheet", href="/css/cart-items.css")
 block content
+
+    //-
+        --- The new cart section ---
     main
-        h1 Shop
-        p List of all the products
+        h1 CART
+        p Your Cart Items
         if cart.length > 0
-            each cartItem in cart
-                .card
-                    .card-header
-                        span #{cartItem.productId.title}
-                    .card-image
-                        img(src="", alt="")
-                    .card-body 
-                        .card-body-details
+            .cart-items-data-grid
+                each cartItem in cart
+                    .cart-items-row
+                        .cart-items-column
+                            span #{cartItem.productId.title}
+                        .cart-items-column
+                            img(src="", alt="")
+                        .cart-items-column-description
                             p #{cartItem.productId.description}
-                            p Qunatity #{cartItem.quantity}
-                        .card-body-controls
+                        .cart-items-column
+                            p #{cartItem.quantity}
+                        .cart-items-column
                             form(action="/cart-delete" method="POST")
-                                - var productId = cartItem.productId._id + ""
-                                input(type="hidden" name="productId" value=productId)
+                                - var id = cartItem._id + ""
+                                input(type="hidden" name="id" value=id)
                                 button(type="submit") Delete
         else
-            p No Products Available...
+            p Cart is empty ...
