@@ -1,0 +1,62 @@
+/*
+    --- Reset ---
+*/
+@import "colors.scss";
+
+html
+{
+    padding : 0;
+    body
+    {
+        margin : 0;
+        padding : 0;  
+        h1 
+        {
+            margin : 0;
+            padding : 0;
+        }
+    }
+}
+.main-header
+{
+    background-color: color('primary');
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .company-logo
+    {
+        flex: 1;
+        color: color('font-light');
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 2%;
+    }
+    .navigation
+    {
+        padding: 2%;
+        flex: 2;
+        text-align: center;
+        .navigation-list
+        {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            .list-item
+            {
+                display: inline-block;
+                margin-left: 2%;
+                margin-right: 2px;
+                a
+                {
+                    color: color('font-light');
+                    text-decoration: none;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-weight: bolder;
+                }
+            }
+        }
+
+    }
+}
