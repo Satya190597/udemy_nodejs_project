@@ -54,6 +54,20 @@ router.post('/user/add-to-cart',(request,response) => {
         response.redirect('/cart')
     })
 })
-
+/*
+---- Add Order ----
+*/
+router.post('/add-product',(request,response) => {
+    let products = [] 
+    products = request.user
+    .populate("cart.items.productId")
+    .execPopulate()
+    .cart
+    .items
+    .map(items => {
+        return {product:{...items.productId._doc},quantity:items.quantity}
+    })
+    console.log("Products : "+JSON.stringify(products))
+})
 
 module.exports = router

@@ -26,5 +26,7 @@ block content
                                 - var id = cartItem._id + ""
                                 input(type="hidden" name="id" value=id)
                                 button(type="submit") Delete
+                form(action="/user/add-product" method="POST")
+                    button(type="submit") Add Order
         else
             p Cart is empty ...

@@ -68,6 +68,14 @@ user.methods.deleteItemsFromCart = function(id){
     console.log('Unable to remove item from cart '+error)
     })
 }
+
+user.methods.placeOrder = function(){
+    /*
+        1. Place order
+    */
+   const orderList = this.cart.items
+}
+
 module.exports = mongoose.model('User',user)
 // const mongodb = require('mongodb')
 // const db = require('../util/datbase')
