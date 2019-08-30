@@ -70,11 +70,6 @@ user.methods.deleteItemsFromCart = function(id){
 }
 
 
-user.methods.addOrder = function(){
-    console.log("Cart Items "+this.cart.items)
-    return products = this.cart.items.map(items => {
-        return {product:items.productId,quantity:items.quantity}
-    })
-}
+
 
 module.exports = mongoose.model('User',user)

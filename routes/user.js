@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const User = require('../models/user')
+const odersController = require('../controllers/oders')
 
 // router.post('/create-user',(request,response)=>{
 //     const user = new User(request.body.username,request.body.email)
@@ -56,13 +57,11 @@ router.post('/user/add-to-cart',(request,response) => {
 })
 
 router.post('/user/add-order',(request,response) => {
-    console.log('Adding Order ...')
-    request.user.addOrder()
-    .this(result => {
-        console.log('Result ' + result)
-        response.redirect('/cart');
-    });
+    odersController(request.user)
+    response.redirect('/cart')
 })
+
+
 
 
 module.exports = router
