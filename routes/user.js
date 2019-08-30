@@ -54,20 +54,15 @@ router.post('/user/add-to-cart',(request,response) => {
         response.redirect('/cart')
     })
 })
-/*
----- Add Order ----
-*/
-router.post('/add-product',(request,response) => {
-    let products = [] 
-    products = request.user
-    .populate("cart.items.productId")
-    .execPopulate()
-    .cart
-    .items
-    .map(items => {
-        return {product:{...items.productId._doc},quantity:items.quantity}
-    })
-    console.log("Products : "+JSON.stringify(products))
+
+router.post('/user/add-order',(request,response) => {
+    console.log('Adding Order ...')
+    request.user.addOrder()
+    .this(result => {
+        console.log('Result ' + result)
+        response.redirect('/cart');
+    });
 })
+
 
 module.exports = router
