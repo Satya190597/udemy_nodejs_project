@@ -1,7 +1,6 @@
 const Order = require('../models/order')
 
-const addOrders = function(request,response)
-{
+exports.addOders = function(request,response){
     const newOrder = new Order()
     
     request.user.populate('cart.items.productId')
@@ -30,4 +29,13 @@ const addOrders = function(request,response)
                 })
 }
 
-module.exports =  addOrders
+exports.getOders = function(request,response){
+    Order.find({'user.userId':request.user}).then(result => {
+        console.log('\n[ Oders : ' + result + ' ]')
+        return response.render('oders/oders',{oders:result,pageTitle:'Oders'})
+    })
+    .catch(error => {
+        console.log('\nError : Unable to get oders '+ error)
+        return response.render('oders/oders',{oders:[],pageTitle:'Oders'})
+    })
+}

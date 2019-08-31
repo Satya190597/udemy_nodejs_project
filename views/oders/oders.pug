@@ -1,0 +1,13 @@
+extends ../layouts/layout.pug
+block styles
+    link(rel="stylesheet", href="/css/form.css")
+block content
+    h1  User Oders
+    div 
+        each oder in oders
+            h2 Oder Number #{oder._id}
+            ul 
+                each product in oder.products
+                    li 
+                        strong Title #{product.product.title} 
+                        small Quantity #{product.quantity}

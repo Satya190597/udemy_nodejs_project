@@ -56,7 +56,9 @@ router.post('/user/add-to-cart',(request,response) => {
     })
 })
 
-router.post('/user/add-order',odersController)
+router.post('/user/add-order',odersController.addOders)
+
+router.get('/user/get-order',odersController.getOders)
 
 
 
