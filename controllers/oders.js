@@ -12,10 +12,17 @@ const addOrders = function(request,response)
                     newOrder.user.userId = user
                     newOrder.save()
                             .then(result => {
-                                response.redirect('/cart')
+                                request.user.clearCartItems()
+                                            .then(result => {
+                                                console.log('\n[ Updated Empty Cart ' + result + ']')
+                                                response.redirect('/cart')
+                                            })
+                                            .catch(error => {
+                                                console.log('Error ' + error)
+                                            })
                             })
                             .catch(error => {
-
+                                console.log('Error '+error)
                             }) 
                 })
                 .catch(error => {

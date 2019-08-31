@@ -69,6 +69,14 @@ user.methods.deleteItemsFromCart = function(id){
     })
 }
 
+user.methods.clearCartItems = function()
+{
+    /*
+        Note : Empty the cart item by updating an empty cart object.
+    */
+    this.cart = {items:[]}
+    return this.save()
+}
 
 
 
