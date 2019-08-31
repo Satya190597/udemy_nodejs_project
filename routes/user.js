@@ -56,10 +56,7 @@ router.post('/user/add-to-cart',(request,response) => {
     })
 })
 
-router.post('/user/add-order',(request,response) => {
-    odersController(request.user)
-    response.redirect('/cart')
-})
+router.post('/user/add-order',odersController)
 
 
 
