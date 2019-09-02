@@ -1,0 +1,21 @@
+extends ../layouts/layout.pug
+block styles
+    link(rel="stylesheet", href="/css/form.css")
+block content
+    main
+        h1  #{pageTitle}
+        .form-container
+            form(action="/auth/login" method="POST")
+                .form-row
+                    .form-col-1
+                        label(for="email") Email
+                    .form-col-2
+                        imput(type="text" name="email").input-control
+                .form-row
+                    .form-col-1
+                        label(for="password") Password
+                    .form-col-2
+                        input(type="password" name="password").input-control
+                .form-row
+                    .form-col-2
+                        button(type="submit") Login

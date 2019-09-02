@@ -7,6 +7,7 @@ const mongodbConnect = require('./util/datbase')
 const admin = require('./routes/admin')
 const shop = require('./routes/shop')
 const user = require('./routes/user')
+const auth = require('./routes/auth')
 const mongoose = require('mongoose')
 
 const User = require('./models/user')
@@ -48,6 +49,7 @@ app.use((request,response,next) => {
 
 app.use('/admin',admin)
 app.use('/user',user)
+app.use('/auth',auth)
 app.use(shop)
 
 app.use(errorController.get404)
