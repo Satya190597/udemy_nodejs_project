@@ -1,4 +1,5 @@
 const express = require('express')
+const session = require('express-session')
 
 const bodyParser = require('body-parser')
 const path = require('path')
@@ -28,6 +29,11 @@ app.set('views','views')
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')))
 app.use(express.static(path.join(__dirname,'images')))
+app.use(session({
+    secret:'satyanodeapp',
+    resave:false,
+    saveUninitialized:false,
+}))
 
 
 /* Get a particular user for every request */
@@ -57,27 +63,7 @@ app.use(errorController.get404)
 const connectionUrl = 'mongodb+srv://satya_read_write:6RdrkutxX1Q6FtvI@cluster0-zokmm.mongodb.net/test?retryWrites=true&w=majority'
 mongoose.connect(connectionUrl,{useNewUrlParser: false})
 .then(result => {
-    User.findOne()
-    .then(user => {
-        console.log(">>>"+user)
-        if(!user)
-        {
-            const newUser = new User({
-                name : 'Satya Prakash Nandy',
-                email : 'nandy@yahoo.in',
-                cart : {items:[]}
-            })
-            return newUser.save()
-        }
-        return user
-    })
-    .then(user => {
-        console.log('>>> Current User' + user)
-        app.listen(3000)
-    })
-    .catch(error => {
-        console.log('>>> Unable To Create User' + error)
-    }) 
+    app.listen(3000)
 })
 .catch(error => {
     console.log('Unable To Connect '+error)
