@@ -2,31 +2,26 @@ extends ../layouts/layout.pug
 
 block styles
     link(rel="stylesheet", href="/css/card.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
 
 block content
     main
-        h1 My Products
-        p List of all the products
-        if products.length > 0
-            each product in products
-                .card
-                    .card-header
-                        span #{product.title}
-                    .card-image
-                        img(src="", alt="")
-                    .card-body 
-                        .card-body-details
-                            p #{product.description}
-                            span #{product.price}
-                        .card-body-controls
-                            - var urlEditProduct = "/admin/edit-product/" + product.id
-                            a(href=urlEditProduct) Edit Product
-                            - var urlProductDetail = "/products/" + product._id
-                            a(href=urlProductDetail) View Product
-                            button Add To Chart
-                            form(action="/admin/delete-product" method="POST")
-                                - let productId = product.id
-                                input(type="hidden" value=productId name="id")
-                                button(type="submit") Delete Product
-        else
-            p No Products Available...
+        .card-container
+            if products.length > 0
+                each product in products
+                    .card
+                        .card-header
+                            span #{product.title}
+                        .card-body 
+                            .card-body-image
+                                img(src="product.png", alt="")
+                            .card-body-details
+                                p Description : #{product.description} 
+                                p Price : 
+                                    strong.cart-price #{product.price}
+                            .card-body-controls
+                                - var urlProductDetail = "/products/" + product._id
+                                a(href=urlProductDetail).view-product-link
+                                    i(class="fa fa-search fa-lg" aria-hidden="true")
+            else
+                p No Products Available...

@@ -4,11 +4,13 @@ const shopController = require('../controllers/shop')
 
 const productController = require('../controllers/product')
 
+const auth = require('../middleware/loginAuth')
+
 const route = express.Router()
 
 route.get('/',shopController.getIndex)
 
-route.get('/products',shopController.getAllProducts)
+route.get('/products',auth.isAuthenticated,shopController.getAllProducts)
 
 route.get('/products/:productId',productController.getProductDetail)
 

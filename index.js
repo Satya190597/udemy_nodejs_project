@@ -52,7 +52,6 @@ app.use((request,response,next) => {
     })
 })
 
-
 app.use('/admin',admin)
 app.use('/user',user)
 app.use('/auth',auth)

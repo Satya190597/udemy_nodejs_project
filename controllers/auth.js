@@ -12,7 +12,7 @@ exports.loginUser = (request,response,next) => {
         return bcrypt.compare(request.body.password,result.password).then(result => {
             if(result)
             {
-                request.session.isLogin = true
+                request.session.isAuthenticated = true
                 request.session.user = result
                 return response.redirect('/')
             }
@@ -55,4 +55,9 @@ exports.signUpUser = (request,response,next) => {
     .catch(error => {
         console.log('Unable to start user login process')
     })
+}
+
+exports.validateAuthentication = (request,response,next) => {
+    response.locals.isAuthenticated = request.session.isAuthenticated
+    next()
 }
