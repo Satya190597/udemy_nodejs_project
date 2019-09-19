@@ -3,6 +3,7 @@ const session = require('express-session')
 
 const bodyParser = require('body-parser')
 const path = require('path')
+const flash = require('connect-flash')
 
 const mongodbConnect = require('./util/datbase')
 const admin = require('./routes/admin')
@@ -34,6 +35,7 @@ app.use(session({
     resave:false,
     saveUninitialized:false,
 }))
+app.use(flash())
 
 
 /* Get a particular user for every request */

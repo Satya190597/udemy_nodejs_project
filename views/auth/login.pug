@@ -3,19 +3,18 @@ block styles
     link(rel="stylesheet", href="/css/form.css")
 block content
     main
-        h1  #{pageTitle}
         .form-container
             form(action="/auth/login" method="POST")
                 .form-row
-                    .form-col-1
-                        label(for="email") Email
-                    .form-col-2
-                        input(type="email" name="email").input-control
+                    label(for="email") Email
                 .form-row
-                    .form-col-1
-                        label(for="password") Password
-                    .form-col-2
-                        input(type="password" name="password").input-control
+                    input(type="email" name="email").input-control
                 .form-row
-                    .form-col-2
-                        button(type="submit") Login
+                    label(for="password") Password
+                .form-row
+                    input(type="password" name="password").input-control
+                if message.length > 0
+                    .form-row
+                        p.error-message #{message}  
+                .form-row
+                    button(type="submit").login-button Login

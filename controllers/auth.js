@@ -2,25 +2,28 @@ const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 
 exports.logIn = (request,response,next) => {
+    let message = request.flash('message')
+    if(message.length>0)
+        message = message[0]
     response.render('auth/login',{
-        pageTitle : 'Login'
+        pageTitle : 'Login',
+        message: message,
     })
 }
 
 exports.loginUser = (request,response,next) => {
-    User.findOne({email:request.body.email}).then(result => {
-        return bcrypt.compare(request.body.password,result.password).then(result => {
-            if(result)
-            {
-                request.session.isAuthenticated = true
-                request.session.user = result
-                return response.redirect('/')
-            }
-            return response.redirect('/auth/login')
-        })
-        .catch(error => {
-            console.log('Error : Unable to compare user password ',error)
-        })
+    User.findOne({email:request.body.email}).then(result => {   
+        return result ? bcrypt.compare(request.body.password,result.password) : false
+    })
+    .then(result => {
+        if(result)
+        {
+            request.session.isAuthenticated = true
+            request.session.user = result
+            return response.redirect('/')
+        }
+        request.flash('message','Invalid email or password')
+        return response.redirect('/auth/login')
     })
     .catch(error => {
         console.log('Error : Unable to find user ',error)
@@ -43,10 +46,10 @@ exports.signUpUser = (request,response,next) => {
                 password : hash,
                 cart : {items:[]}
             })
-            newUser.save().then(result => {
-                return response.redirect('/auth/signup')
-            })
-            .catch('Unable to signup user')
+            return newUser.save()
+        })
+        .then(result => {
+            return response.redirect('/auth/signup')
         })
         .catch(error => {
             console.log('Unable To Encrypt Password')
