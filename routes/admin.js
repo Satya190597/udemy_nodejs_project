@@ -2,9 +2,11 @@ const express = require('express')
 
 const adminController = require('../controllers/admin')
 
+const authentication = require('../middleware/loginAuth')
+
 const route = express.Router()
 
-route.get('/add-product',adminController.getAddProduct)
+route.get('/add-product',authentication.isAuthenticated,authentication.isAuthorize(['admin']),adminController.getAddProduct)
 
 route.post('/add-product',adminController.postAddProduct)
 

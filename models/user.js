@@ -11,6 +11,7 @@ const user = new Schema({
         type : String,
         required : true
     },
+    roles:[],
     cart : {
         items : [{
             productId : {

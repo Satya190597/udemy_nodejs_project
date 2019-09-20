@@ -13,13 +13,13 @@ exports.logIn = (request,response,next) => {
 
 exports.loginUser = (request,response,next) => {
     User.findOne({email:request.body.email}).then(result => {   
-        return result ? bcrypt.compare(request.body.password,result.password) : false
+        return result ? {'validate':bcrypt.compare(request.body.password,result.password),'user':result} : {'validate':false}
     })
     .then(result => {
-        if(result)
+        if(result.validate)
         {
             request.session.isAuthenticated = true
-            request.session.user = result
+            request.session.user = result.user
             return response.redirect('/')
         }
         request.flash('message','Invalid email or password')
@@ -44,7 +44,8 @@ exports.signUpUser = (request,response,next) => {
             const newUser = new User({
                 email : request.body.email,
                 password : hash,
-                cart : {items:[]}
+                cart : {items:[]},
+                roles : ['user']
             })
             return newUser.save()
         })
@@ -60,7 +61,7 @@ exports.signUpUser = (request,response,next) => {
     })
 }
 
-exports.validateAuthentication = (request,response,next) => {
-    response.locals.isAuthenticated = request.session.isAuthenticated
-    next()
+exports.logOut = (request,response,next) => {
+    request.session.destroy()
+    response.redirect('/')
 }
