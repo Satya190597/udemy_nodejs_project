@@ -12,18 +12,20 @@ exports.logIn = (request,response,next) => {
 }
 
 exports.loginUser = (request,response,next) => {
-    User.findOne({email:request.body.email}).then(result => {   
-        return result ? {'validate':bcrypt.compare(request.body.password,result.password),'user':result} : {'validate':false}
-    })
-    .then(result => {
-        if(result.validate)
-        {
-            request.session.isAuthenticated = true
-            request.session.user = result.user
-            return response.redirect('/')
-        }
-        request.flash('message','Invalid email or password')
-        return response.redirect('/auth/login')
+    User.findOne({email:request.body.email}).then(user => {  
+        bcrypt.compare(request.body.password,user.password).then(isAuthenticated => {
+            if(isAuthenticated)
+            {
+                request.session.isAuthenticated = isAuthenticated
+                request.session.user = user
+                return response.redirect('/')
+            }
+            request.flash('message','Invalid email or password')
+            return response.redirect('/auth/login')
+        })
+        .catch(error => {
+            console.log('Unable To Log In ',error)
+        })
     })
     .catch(error => {
         console.log('Error : Unable to find user ',error)

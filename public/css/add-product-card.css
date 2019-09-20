@@ -1,0 +1,29 @@
+.card-container
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 5%;
+    padding-bottom: 5%; 
+}
+.card
+{
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    box-shadow: 0 0 5px #E5E8E8;
+}
+.card-side-map
+{
+    flex: 1;
+    background-image: url('../side_map.jpg');
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 300px;
+}
+.card-content
+{
+    flex: 2;
+    
+}

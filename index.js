@@ -36,24 +36,6 @@ app.use(session({
     saveUninitialized:false,
 }))
 app.use(flash())
-
-
-/* Get a particular user for every request */
-
-app.use((request,response,next) => {
-    /*
-        --- Mongoose ---
-    */
-    User.findById('5d4ae000a0b8674a60b02719')
-    .then(user => {
-        request.user = user
-        next()
-    })
-    .catch((error) => {
-        console.log('Unable To Set Error In Request '+error)
-    })
-})
-
 app.use('/admin',admin)
 app.use('/user',user)
 app.use('/auth',auth)

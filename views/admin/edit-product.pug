@@ -1,8 +1,15 @@
 extends ../layouts/layout.pug
 block styles
     link(rel="stylesheet", href="/css/form.css")
+    link(rel="stylesheet",href="/css/add-product-card.css")
 block content
     main
+        .card-container
+            .card
+                .card-side-map
+                    
+                .card-content
+                    h1 Hello
         .form-container
             - let postUrl = post + ""
             form(action=postUrl method="POST")

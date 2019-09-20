@@ -1,27 +1,29 @@
 extends ../layouts/layout.pug
 
 block styles
-    link(rel="stylesheet", href="/css/card.css")
+    link(rel="stylesheet", href="/css/single-card.css")
 
 block content
     main
         h1 My Products
         p List of all the products
-        .card
-            .card-header
-                span #{product.title}
-            .card-image
-                img(src="", alt="")
-            .card-body 
-                .card-body-details
-                    p #{product.description}
-                    span #{product.price}
-                .card-body-controls
-                    form(action="/user/user/add-to-cart" method="POST")
-                        - var productId = product.id + ""
-                        - var price = product.price + ""
-                        input(type="hidden" value=productId name="id")
-                        input(type="hidden" value=price name="price")
-                        button(type="submit") Add To Cart
+        .card-container
+            .card
+                .card-header
+                    span #{product.title}
+                .card-body 
+                    .card-body-image
+                        img(src="../product.png", alt="")
+                    .card-body-details
+                        p Description : #{product.description} 
+                        p Price : 
+                            strong.cart-price #{product.price}
+                    .card-body-controls
+                        form(action="/user/user/add-to-cart" method="POST")
+                            - var productId = product.id + ""
+                            - var price = product.price + ""
+                            input(type="hidden" value=productId name="id")
+                            input(type="hidden" value=price name="price")
+                            button(type="submit") Add To Cart
         //- else
         //-     p Sorry This Product Is Not Available
