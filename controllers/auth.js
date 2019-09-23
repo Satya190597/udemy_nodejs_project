@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
+const { validationResult } = require('express-validator')
 
 exports.logIn = (request,response,next) => {
     let message = request.flash('message')
@@ -12,20 +13,31 @@ exports.logIn = (request,response,next) => {
 }
 
 exports.loginUser = (request,response,next) => {
-    User.findOne({email:request.body.email}).then(user => {  
-        bcrypt.compare(request.body.password,user.password).then(isAuthenticated => {
-            if(isAuthenticated)
-            {
-                request.session.isAuthenticated = isAuthenticated
-                request.session.user = user
-                return response.redirect('/')
-            }
-            request.flash('message','Invalid email or password')
-            return response.redirect('/auth/login')
-        })
-        .catch(error => {
-            console.log('Unable To Log In ',error)
-        })
+    User.findOne({email:request.body.email}).then(user => { 
+        const errors = validationResult(request) 
+        if(!errors.isEmpty)
+        {
+            bcrypt.compare(request.body.password,user.password).then(isAuthenticated => {
+                if(isAuthenticated)
+                {
+                    request.session.isAuthenticated = isAuthenticated
+                    request.session.user = user
+                    return response.redirect('/')
+                }
+                request.flash('message','Invalid email or password')
+                return response.redirect('/auth/login')
+            })
+            .catch(error => {
+                console.log('Unable To Log In ',error)
+            })
+        }
+        else
+        {
+            return response.render('auth/login',{
+                pageTitle : 'Login',
+                message: errors.array()[0].msg,
+            })
+        }
     })
     .catch(error => {
         console.log('Error : Unable to find user ',error)

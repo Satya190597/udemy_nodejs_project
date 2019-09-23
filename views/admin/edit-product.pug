@@ -9,51 +9,50 @@ block content
                 .card-side-map
                     
                 .card-content
-                    h1 Hello
-        .form-container
-            - let postUrl = post + ""
-            form(action=postUrl method="POST")
-                .form-row
-                    .form-col-1
-                        label(for="title") Title
-                    .form-col-2
-                        if edit
-                            - let productTitle = product.title
-                            - let productId = product._id
-                            input(type="hidden" name="id" value=productId)
-                            input(type="text" name="title" id="title" value=productTitle).input-control
-                        else
-                            input(type="text" name="title" id="title").input-control
-                .form-row
-                    .form-col-1
-                        label(for="price") Price
-                    .form-col-2
-                        if edit
-                            - let productPrice = product.price
-                            input(type="text" name="price" id="price" value=productPrice).input-control 
-                        else
-                            input(type="text" name="price" id="price").input-control
-                .form-row
-                    .form-col-1
-                        label(for="title") Description
-                    .form-col-2
-                        if edit
-                            textarea(name="description", cols="30", rows="5" id="title").textarea
-                                | #{product.description}
-                        else
-                            textarea(name="description", cols="30", rows="5" id="title").textarea
-                .form-row
-                    .form-col-1
-                        label(for="imageUrl") Image Url
-                    .form-col-2
-                        if edit
-                            - let productImageUrl = product.imageUrl
-                            input(type="text" name="imageUrl" id="imageUrl" value=productImageUrl).input-control
-                        else
-                            input(type="text" name="imageUrl" id="imageUrl").input-control
-                .form-row
-                    .form-col-2
-                        if edit
-                            button(type="submit") Edit Product
-                        else
-                            button(type="submit") Add Product
+                    .form-container
+                        - let postUrl = post + ""
+                        form(action=postUrl method="POST")
+                            .form-row
+                                .form-col-1
+                                    label(for="title") Title
+                                .form-col-2
+                                    if edit
+                                        - let productTitle = product.title
+                                        - let productId = product._id
+                                        input(type="hidden" name="id" value=productId)
+                                        input(type="text" name="title" id="title" value=productTitle)
+                                    else
+                                        input(type="text" name="title" id="title").input-control
+                            .form-row
+                                .form-col-1
+                                    label(for="price") Price
+                                .form-col-2
+                                    if edit
+                                        - let productPrice = product.price
+                                        input(type="text" name="price" id="price" value=productPrice).input-control 
+                                    else
+                                        input(type="text" name="price" id="price").input-control
+                            .form-row
+                                .form-col-1
+                                    label(for="title") Description
+                                .form-col-2
+                                    if edit
+                                        textarea(name="description", cols="30", rows="5" id="title").textarea
+                                            | #{product.description}
+                                    else
+                                        textarea(name="description", cols="30", rows="5" id="title").textarea
+                            .form-row
+                                .form-col-1
+                                    label(for="imageUrl") Image Url
+                                .form-col-2
+                                    if edit
+                                        - let productImageUrl = product.imageUrl
+                                        input(type="text" name="imageUrl" id="imageUrl" value=productImageUrl).input-control
+                                    else
+                                        input(type="text" name="imageUrl" id="imageUrl").input-control
+                            .form-row
+                                .form-col-2
+                                    if edit
+                                        button(type="submit").button Edit Product
+                                    else
+                                        button(type="submit").button Add Product
